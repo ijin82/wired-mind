@@ -107,6 +107,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="row justify-content-center mt-5 mb-5">
+            {{ __('Want this blog? Checkout that') }}&nbsp;
+            <a href="https://github.com/ijin82/wired-mind" target="_blank">{{ __('here') }}</a>
+        </div>
+
     </div>
 
     <script>
@@ -165,5 +171,6 @@
     <!-- /google-->
 
     <!-- /counters -->
+
 </body>
 </html>
