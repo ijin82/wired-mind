@@ -108,9 +108,11 @@
             @yield('content')
         </main>
 
-        <div class="row justify-content-center mt-5 mb-5">
-            {{ __('Want this blog? Checkout that') }}&nbsp;
-            <a href="https://github.com/ijin82/wired-mind" target="_blank">{{ __('here') }}</a>
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-center">
+                {{ __('Want this blog? Checkout that') }}&nbsp;
+                <a href="https://github.com/ijin82/wired-mind" target="_blank">{{ __('here') }}</a>
+            </div>
         </div>
 
     </div>
