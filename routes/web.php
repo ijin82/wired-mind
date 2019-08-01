@@ -27,4 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/delete-comment/{commentId}', 'Blog@deleteComment')->name('delete-comment');
 });
 
+Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
+    Route::get('/users', 'Admin\Users@index')->name('a.users');
+});
+
 Auth::routes(['verify' => true]);
