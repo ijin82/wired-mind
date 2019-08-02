@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <h2>Users</h2>
 
                 {{ $users->links() }}
@@ -25,7 +25,14 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->role_id }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>
+                            {{ $user->email }}<br>
+                            @if ($user->email_verified_at)
+                                <small class="disabled">{{ __('Email verified at') }}: {{ $user->email_verified_at }}</small>
+                            @else
+                                <small class="disabled">{{ __('Email is not verified') }}</small>
+                            @endif
+                        </td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>
                     </tr>

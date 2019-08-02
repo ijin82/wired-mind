@@ -60,7 +60,7 @@
 
         <main class="py-4">
             <div class="container mb-3">
-                <div class="col-sm-11">
+                <div class="col-sm-12">
                     <nav class="nav nav-pills flex-column flex-sm-row">
                         <a class="flex-sm-fill text-sm-center nav-link active" href="#">Users</a>
                         <a class="flex-sm-fill text-sm-center nav-link disabled" href="#" aria-disabled="true">Posts</a>
