@@ -62,9 +62,33 @@
             <div class="container mb-3">
                 <div class="col-sm-12">
                     <nav class="nav nav-pills flex-column flex-sm-row">
-                        <a class="flex-sm-fill text-sm-center nav-link active" href="#">Users</a>
-                        <a class="flex-sm-fill text-sm-center nav-link disabled" href="#" aria-disabled="true">Posts</a>
-                        <a class="flex-sm-fill text-sm-center nav-link" href="#">Comments</a>
+                        <?php
+                            $activeUsers = $activePosts = $activeComments = '';
+
+                            if (empty($admActive)) {
+                                $admActive = 'users';
+                            }
+
+                            switch($admActive) {
+                                case 'users':
+                                    $activeUsers = 'active';
+                                break;
+
+                                case 'posts':
+                                    $activePosts = 'active';
+                                break;
+
+                                case 'comments':
+                                    $activeComments = 'active';
+                                break;
+                            }
+                        ?>
+                        <a class="flex-sm-fill text-sm-center nav-link {{ $activeUsers }}"
+                           href="{{ route('a.users') }}">Users</a>
+                        <a class="flex-sm-fill text-sm-center nav-link disabled {{ $activePosts }}"
+                           href="#" aria-disabled="true">Posts</a>
+                        <a class="flex-sm-fill text-sm-center nav-link {{ $activeComments }}"
+                           href="{{ route('a.comments') }}">Comments</a>
                     </nav>
                 </div>
             </div>

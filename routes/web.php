@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     Route::get('/users', 'Admin\Users@index')->name('a.users');
+    Route::get('/comments', 'Admin\Comments@index')->name('a.comments');
 });
 
 Auth::routes(['verify' => true]);

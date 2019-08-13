@@ -10,7 +10,7 @@ class Users extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::orderBy('id', 'asc')->paginate(10);
+        $users = User::orderBy('id', 'asc')->paginate(20);
 
         if ($users->count() == 0 && $request->input('page', 0) > 1) {
             abort(404);
@@ -19,6 +19,7 @@ class Users extends Controller
         return view('admin/users/index')
             ->with([
                 'users' => $users,
+                'admActive' => 'users',
             ]);
     }
 }
