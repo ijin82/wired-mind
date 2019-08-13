@@ -28,7 +28,7 @@
                         <td>
                             {{ $user->email }}<br>
                             @if ($user->email_verified_at)
-                                <small class="disabled">{{ __('Email verified at') }}: {{ $user->email_verified_at }}</small>
+                                <span class="badge badge-success"><small class="disabled">{{ __('Email verified at') }}: {{ $user->email_verified_at }}</small></span>
                             @else
                                 <small class="disabled">{{ __('Email is not verified') }}</small>
                             @endif
