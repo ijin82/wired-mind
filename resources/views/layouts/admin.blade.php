@@ -85,8 +85,8 @@
                         ?>
                         <a class="flex-sm-fill text-sm-center nav-link {{ $activeUsers }}"
                            href="{{ route('a.users') }}">Users</a>
-                        <a class="flex-sm-fill text-sm-center nav-link disabled {{ $activePosts }}"
-                           href="#" aria-disabled="true">Posts</a>
+                        <a class="flex-sm-fill text-sm-center nav-link {{ $activePosts }}"
+                           href="{{ route('a.posts') }}" aria-disabled="true">Posts</a>
                         <a class="flex-sm-fill text-sm-center nav-link {{ $activeComments }}"
                            href="{{ route('a.comments') }}">Comments</a>
                     </nav>

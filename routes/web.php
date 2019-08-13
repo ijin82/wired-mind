@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     Route::get('/users', 'Admin\Users@index')->name('a.users');
     Route::get('/comments', 'Admin\Comments@index')->name('a.comments');
+    Route::get('/posts', 'Admin\Posts@index')->name('a.posts');
+    Route::get('/posts/{id}', 'Admin\Posts@show')->name('a.posts.show');
+    Route::post('/posts/{id}', 'Admin\Posts@save')->name('a.posts.save');
 });
 
 Auth::routes(['verify' => true]);
