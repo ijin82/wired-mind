@@ -13,8 +13,10 @@
                 <form method="post" action="{{ route('save-profile') }}">
                     @csrf
                     <div class="form-group">
-                        <img src="https://www.gravatar.com/avatar/{{ md5(auth()->user()->email) }}"
-                             class="gravatar" title="Your avatar from gravatar.com"/>
+                        <a href="https://www.gravatar.com/" target="_blank">
+                            <img src="https://www.gravatar.com/avatar/{{ md5(auth()->user()->email) }}"
+                                 class="gravatar" title="Your avatar from gravatar.com"/>
+                        </a>
                     </div>
                     <div class="form-group">
                         <label for="name">{{ __('Name on site') }}</label>

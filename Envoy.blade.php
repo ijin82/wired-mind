@@ -1,8 +1,8 @@
-@servers(['web' => 'root@wired-mind.info'])
+@servers(['web' => 'root@wired-mind.info -p 9988'])
 
 @task('deploy-PROD')
     su -l ijin
-    cd /home/ijin/projects/php/wm3
+    cd /home/ijin/projects/php/wired-mind
     git pull origin master
 
     {{-- envoy run deploy --composer --}}
