@@ -76,6 +76,9 @@ class Blog extends Controller
 
         $tags = Tag::OrderBy('name')->get();
 
+        // for correct redirect after registration
+        session(['url.intended' => url()->current()]);
+
         return view('post')->with([
             'post' => $post,
             'pageTitle' => $post->header,
