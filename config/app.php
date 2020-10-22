@@ -13,12 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'wm3'),
-
-    /**
-     * App owner user ID
-     */
-    'owner_id' => env('APP_OWNER_ID', 1),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'ru',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -170,7 +165,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Buzz\LaravelGoogleCaptcha\CaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -213,6 +207,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,

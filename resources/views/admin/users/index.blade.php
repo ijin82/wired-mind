@@ -15,8 +15,8 @@
                         <th>User</th>
                         <th>Role</th>
                         <th>E-mail</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
+                        <th class="nowarp">Created at</th>
+                        <th class="nowarp">Login at</th>
                     </tr>
                     </thead>
 
@@ -33,8 +33,8 @@
                                 <small class="disabled">{{ __('Email is not verified') }}</small>
                             @endif
                         </td>
-                        <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
+                        <td class="nowarp">{{ $user->created_at }}</td>
+                        <td class="nowarp">{{ $user->updated_at }}</td>
                     </tr>
                     @endforeach
                 </table>
