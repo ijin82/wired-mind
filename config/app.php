@@ -15,6 +15,11 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    /**
+     * App owner user ID
+     */
+    'owner_id' => env('APP_OWNER_ID', 1),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

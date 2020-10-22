@@ -106,7 +106,7 @@
                 <h2>{{ __('Add comment') }}</h2>
                 <a name="add-comment"></a>
 
-                <form method="post" action="{{ route('comment', ['postId' => $post->id]) }}">
+                <form method="post" action="{{ route('comment') }}">
                     @csrf
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                     <input type="hidden" name="reply_comment_id" id="replyCommentId" value="0">
