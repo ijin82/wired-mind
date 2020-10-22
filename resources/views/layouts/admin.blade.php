@@ -9,7 +9,7 @@
 
     <title>
         @if(!empty($pageTitle)){{ $pageTitle }} - @endif
-        {{ config('app.name', 'wm3') }} | {{ __('Admin') }}
+        {{ config('app.name', 'noname') }} | {{ __('Admin') }}
     </title>
 
     <!-- Bootstrap -->

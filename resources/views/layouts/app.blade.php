@@ -9,7 +9,7 @@
 
     <title>
         @if(!empty($pageTitle)){{ $pageTitle }} - @endif
-        {{ config('app.name', 'Laravel') }}
+        {{ config('app.name', 'noname') }}
     </title>
 
     <!-- Bootstrap -->
