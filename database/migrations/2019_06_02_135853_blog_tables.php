@@ -36,8 +36,6 @@ class BlogTables extends Migration
             $table->integer('tag_id');
             $table->integer('taggable_id');
             $table->string('taggable_type');
-
-            $table->timestamps();
         });
     }
 

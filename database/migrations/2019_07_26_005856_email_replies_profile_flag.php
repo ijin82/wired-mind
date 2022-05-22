@@ -28,6 +28,9 @@ class EmailRepliesProfileFlag extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('allow_replies');
+        });
+
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('unsubscribe_replies_token');
         });
     }
