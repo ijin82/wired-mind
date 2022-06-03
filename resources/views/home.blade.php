@@ -17,7 +17,7 @@
             @foreach($posts as $post)
             <div class="card">
                 <div class="card-header">
-                    <strong><a href="{{ route('post', ['id' => $post->id]) }}">{{ $post->header }}</a></strong>
+                    <strong><a href="{{ route('post', ['id' => $post->id]) }}">{{ $post->title }}</a></strong>
                     <span class="float-right">
                         {{ date_format($post->created_at, "F d, Y") }}
                         <?php

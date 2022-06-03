@@ -21,7 +21,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <strong>{{ $post->header }}</strong>
+                    <strong>{{ $post->title }}</strong>
                     <span class="float-right">
                         {{ date_format($post->created_at, "F d, Y") }}
                     </span>

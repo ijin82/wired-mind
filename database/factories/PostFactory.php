@@ -15,7 +15,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realTextBetween(20, 60),
+            'title' => $this->faker->words(5, true),
             'text' => $this->faker->paragraphs(5, true),
             'visible' => $this->faker->randomElement([true, false])
         ];

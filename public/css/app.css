@@ -1,1 +1,69 @@
+body{
+    font-family: "Consolas", "IBM Plex Mono", "DejaVu Sans Mono", "Verdana";
+    font-size: 14pt;
+}
+
+pre {
+    border: 1px solid #bbb;
+    background-color: #eee;
+    margin: 5px;
+    padding:5px;
+}
+
+a.tag {
+    color:#fff;
+    font-size: larger;
+}
+
+a.tag:hover {
+    color:#fff;
+}
+
+.badge-primary {
+    color: #fff;
+    background-color: #337ab7;
+}
+
+a {
+    color: #337ab7;
+}
+
+a.page-link {
+    color: #337ab7;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0;
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.navbar-light .navbar-brand {
+    color: #337ab7;
+    font-size: 36px;
+}
+
+pre {
+    border-radius: 5px;
+}
+
+img.gravatar {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.invalid-captcha {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.nowarp {
+    white-space: nowrap;
+}
 
