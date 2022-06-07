@@ -49,7 +49,7 @@ class Blog extends Controller
                 'tags' => $tags,
             ])->render();
 
-            Cache::store('redis')->put($cacheKey, $page, 600);
+            Cache::put($cacheKey, $page, 600);
         }
 
         return $page;
@@ -57,27 +57,36 @@ class Blog extends Controller
 
     public function indexByTag($tagId, Request $request)
     {
-        $activeTag = Tag::findOrFail($tagId);
+        $cacheKey = 'blog-page-' . $request->input('page', 1) . '-tag-' . $tagId;
+        $page = Cache::get($cacheKey);
 
-        $posts = Post::whereHas('tags', function (Builder $query) use ($tagId) {
+        if (!$page) {
+            $activeTag = Tag::findOrFail($tagId);
+
+            $posts = Post::whereHas('tags', function (Builder $query) use ($tagId) {
                 $query->where('id', '=', $tagId);
             })
-            ->with('tags')
-            ->where('visible', true)
-            ->OrderBy('id', 'desc')
-            ->paginate(5);
+                ->with('tags')
+                ->where('visible', true)
+                ->OrderBy('id', 'desc')
+                ->paginate(5);
 
-        $tags = Tag::OrderBy('name')->get();
+            $tags = Tag::OrderBy('name')->get();
 
-        if ($posts->count() == 0 && $request->input('page', 0) > 1) {
-            abort(404);
+            if ($posts->count() == 0 && $request->input('page', 0) > 1) {
+                abort(404);
+            }
+
+            $page = view('home')->with([
+                'posts' => $posts,
+                'tags' => $tags,
+                'activeTag' => $activeTag,
+            ])->render();
+
+            Cache::put($cacheKey, $page, 600);
         }
-
-        return view('home')->with([
-            'posts' => $posts,
-            'tags' => $tags,
-            'activeTag' => $activeTag,
-        ]);
+        
+        return $page;
     }
 
     public function post($id)
