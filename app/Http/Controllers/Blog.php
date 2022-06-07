@@ -11,6 +11,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Notifications\NewCommentNotification;
 use App\Notifications\CommentReplyNotification;
+use Illuminate\Support\Facades\Cache;
 
 class Blog extends Controller
 {
@@ -25,24 +26,33 @@ class Blog extends Controller
 
     public function index(Request $request)
     {
-        $posts = Post::whereDoesntHave('tags', function (Builder $query) {
+        $cacheKey = 'blog-page-' . $request->input('page', 1);
+        $page = Cache::get($cacheKey);
+
+        if (!$page) {
+            $posts = Post::whereDoesntHave('tags', function (Builder $query) {
                 $query->where('exclude', '=', 1);
             })
-            ->with('tags')
-            ->where('visible', true)
-            ->OrderBy('id', 'desc')
-            ->paginate(5);
+                ->with('tags')
+                ->where('visible', true)
+                ->OrderBy('id', 'desc')
+                ->paginate(5);
 
-        $tags = Tag::OrderBy('name')->get();
+            $tags = Tag::OrderBy('name')->get();
 
-        if ($posts->count() == 0 && $request->input('page', 0) > 1) {
-            abort(404);
+            if ($posts->count() == 0 && $request->input('page', 0) > 1) {
+                abort(404);
+            }
+
+            $page = view('home')->with([
+                'posts' => $posts,
+                'tags' => $tags,
+            ])->render();
+
+            Cache::store('redis')->put($cacheKey, $page, 600);
         }
 
-        return view('home')->with([
-            'posts' => $posts,
-            'tags' => $tags,
-        ]);
+        return $page;
     }
 
     public function indexByTag($tagId, Request $request)
