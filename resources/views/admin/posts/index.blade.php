@@ -23,7 +23,7 @@
                         <td>
                             <a href="{{ route('a.posts.show', [
                                 'id' => $post->id
-                                ]) }}">{{ $post->header }}</a>
+                                ]) }}">{{ $post->title }}</a>
                             <span class="float-right">
                                 @foreach($post->tags as $tag)
                                     <span class="badge badge-secondary">
