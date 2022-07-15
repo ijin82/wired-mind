@@ -26,66 +26,60 @@ class Blog extends Controller
 
     public function index(Request $request)
     {
-        $cacheKey = 'blog-page-' . $request->input('page', 1);
-        $page = Cache::get($cacheKey);
+        $postsPageKey = 'posts-page-' . $request->input('page', 1);
+        $posts = Cache::get($postsPageKey);
 
-        if (!$page) {
+        if (!$posts) {
             $posts = Post::whereDoesntHave('tags', function (Builder $query) {
-                $query->where('exclude', '=', 1);
-            })
+                    $query->where('exclude', '=', 1);
+                })
                 ->with('tags')
                 ->where('visible', true)
                 ->OrderBy('id', 'desc')
                 ->paginate(5);
 
-            $tags = Tag::OrderBy('name')->get();
-
-            if ($posts->count() == 0 && $request->input('page', 0) > 1) {
-                abort(404);
-            }
-
-            $page = view('home')->with([
-                'posts' => $posts,
-                'tags' => $tags,
-            ])->render();
-
-            Cache::put($cacheKey, $page, 600);
+            Cache::put($postsPageKey, $posts, 600);
         }
 
-        return $page;
+        if ($posts->count() == 0 && $request->input('page', 0) > 1) {
+            abort(404);
+        }
+
+        return view('home')->with([
+            'posts' => $posts,
+            'tags' => $this->getTags(),
+        ])->render();
     }
 
     public function indexByTag($tagId, Request $request)
     {
-        $cacheKey = 'blog-page-' . $request->input('page', 1) . '-tag-' . $tagId;
-        $page = Cache::get($cacheKey);
+        $activeTag = Tag::findOrFail($tagId);
 
-        if (!$page) {
-            $activeTag = Tag::findOrFail($tagId);
+        $postsPageByTagKey = 'posts-page-' . $request->input('page', 1) . '-tag-' . $tagId;
+        $posts = Cache::get($postsPageByTagKey);
 
+        if (!$posts) {
             $posts = Post::whereHas('tags', function (Builder $query) use ($tagId) {
-                $query->where('id', '=', $tagId);
-            })
+                    $query->where('id', '=', $tagId);
+                })
                 ->with('tags')
                 ->where('visible', true)
                 ->OrderBy('id', 'desc')
                 ->paginate(5);
 
-            $tags = Tag::OrderBy('name')->get();
-
-            if ($posts->count() == 0 && $request->input('page', 0) > 1) {
-                abort(404);
-            }
-
-            $page = view('home')->with([
-                'posts' => $posts,
-                'tags' => $tags,
-                'activeTag' => $activeTag,
-            ])->render();
-
-            Cache::put($cacheKey, $page, 600);
+            Cache::put($postsPageByTagKey, $posts, 600);
         }
-        
+
+        if ($posts->count() == 0 && $request->input('page', 0) > 1) {
+            abort(404);
+        }
+
+        $page = view('home')->with([
+            'posts' => $posts,
+            'tags' => $this->getTags(),
+            'activeTag' => $activeTag,
+        ])->render();
+
         return $page;
     }
 
@@ -221,5 +215,17 @@ class Blog extends Controller
         }
 
         return redirect()->back();
+    }
+
+    private function getTags()
+    {
+        $cacheKeyTags = 'tags';
+        $tags = Cache::get($cacheKeyTags);
+
+        if (!$tags) {
+            $tags = Tag::OrderBy('name')->get();
+        }
+
+        return $tags;
     }
 }
